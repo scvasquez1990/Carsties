@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MassTransit;
 using AuctionService.Consumers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MassTransit.Futures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,11 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((context, cfg) =>
     {
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", h =>
+        {
+            h.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
+            h.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
+        });
         cfg.ConfigureEndpoints(context);
     });
 });

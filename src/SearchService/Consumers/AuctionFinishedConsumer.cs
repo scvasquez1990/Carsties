@@ -15,7 +15,7 @@ namespace SearchService.Consumers
         {
             Console.WriteLine("--> Consuming auction finished");
 
-            var auction = await DB.Find<Item>().(context.Message.AuctionId);
+            var auction = await DB.Find<Item>().OneAsync(context.Message.AuctionId);
 
             if (context.Message.ItemSold)
             {

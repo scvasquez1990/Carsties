@@ -9,11 +9,11 @@ using AuctionService.Entities;
 
 namespace AuctionService.Consumers
 {
-    public class AuctionFinishedCosumer : IConsumer<AuctionFinished>
+    public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
     {
         private readonly AuctionDbContext _dbContext;
 
-        public AuctionFinishedCosumer(AuctionDbContext context)
+        public AuctionFinishedConsumer(AuctionDbContext context)
         {
             _dbContext = context;
         }
